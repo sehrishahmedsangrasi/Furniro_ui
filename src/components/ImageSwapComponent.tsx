@@ -192,7 +192,7 @@ const ImageSwapComponent: React.FC = () => {
               <Sheet>
                 <SheetTrigger
                   className="px-6 py-2 bg-white text-black rounded-lg border border-black hover:bg-gray-100"
-                  onClick={handleAddToCart} // Add item to cart
+                  onClick={handleAddToCart} // Add product to cart
                 >
                   Add To Cart
                 </SheetTrigger>
@@ -200,10 +200,10 @@ const ImageSwapComponent: React.FC = () => {
                   <SheetHeader>
                     <SheetTitle className="mb-2 mr-10 text-xl font-bold relative">Shopping Cart</SheetTitle>
                     <SheetDescription>
+                      {/* Display Cart Items */}
                       <span className="border-t border-greyish"></span>
                       {cartItems.length > 0 ? (
                         <>
-                          {/* Cart items display */}
                           {cartItems.map((item, index) => (
                             <div key={index} className="mt-7 flex w-full gap-6">
                               <div className="flex bg-cuspinky items-center justify-center rounded-2xl h-[6rem] w-[8rem]">
@@ -215,36 +215,54 @@ const ImageSwapComponent: React.FC = () => {
                               </div>
                               <div className="mt-6 flex gap-8">
                                 <div>
-                                  <span className="font-medium">Name:</span>
-                                  <span>{item.product.name}</span>
+                                  <span className="text-black text-lg">{item.product.name}</span>
+                                  <br />
+                                  <span className="text-black pr-1">
+                                    {item.quantity} x
+                                    <span className="inline text-drkyellow pl-1">
+                                      {item.product.price}
+                                    </span>
+                                  </span>
                                 </div>
-                                <div>
-                                  <span className="font-medium">Size:</span>
-                                  <span>{item.selectedSize}</span>
-                                </div>
-                                <div>
-                                  <span className="font-medium">Quantity:</span>
-                                  <span>{item.quantity}</span>
-                                </div>
-                                <div>
-                                  <span className="font-medium">Color:</span>
-                                  <span
-                                    className="w-6 h-6 rounded-full"
-                                    style={{ backgroundColor: item.selectedColor }}
+                                <div className="mt-4">
+                                  {/* Remove Item Button */}
+                                  <img
+                                    src="cut.png"
+                                    alt="Remove"
+                                    className="w-4 h-4 cursor-pointer"
+                                    onClick={() => handleRemoveFromCart(index)} // Remove from cart
                                   />
                                 </div>
-                                <button
-                                  className="font-medium"
-                                  onClick={() => handleRemoveFromCart(index)} // Remove item from cart
-                                >
-                                  Remove
-                                </button>
                               </div>
                             </div>
                           ))}
+
+                          {/* Subtotal */}
+                          <div className="mt-10 flex justify-between items-center absolute bottom-[6rem] border-b-2 border-gray-300 h-[4rem]">
+                            <span className="text-lg font-semibold mr-[7rem]">Subtotal</span>
+                            <span className="text-lg font-bold text-drkyellow">
+                              Rp {cartItems.reduce((acc, item) => acc + parseFloat(item.product.price.replace(/[^0-9.-]+/g, "")) * item.quantity, 0).toLocaleString()}.00
+                            </span>
+                          </div>
+
+                          {/* Action Buttons */}
+                          <div className="flex justify-between items-center mt-4 bottom-9 absolute">
+                            <Link
+                              href="/cart"
+                              className="px-6 py-2 bg-white text-black rounded-full mr-3 border border-black hover:bg-gray-100"
+                            >
+                              Cart
+                            </Link>
+                            <Link
+                              href="/checkout"
+                              className="px-6 py-2 bg-white text-black border border-black rounded-full hover:bg-gray-100"
+                            >
+                              Checkout
+                            </Link>
+                          </div>
                         </>
                       ) : (
-                        <p>No items in cart</p>
+                        <span>Your cart is empty</span>
                       )}
                     </SheetDescription>
                   </SheetHeader>
