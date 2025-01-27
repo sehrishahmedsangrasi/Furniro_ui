@@ -10,9 +10,33 @@ import {
 } from "@/components/ui/sheet";
 import Link from 'next/link';
 
+// Define types
+interface Product {
+  src: string;
+  src1: string;
+  src2: string;
+  src3: string;
+  src4: string;
+  themeHeading: string;
+  name: string;
+  price: string;
+  roomType: string;
+  description: string;
+  sizes: string[];
+  colors: string[];
+}
+
+interface CartItem {
+  product: Product;
+  selectedSize: string;
+  selectedColor: string;
+  quantity: number;
+  image: string;
+}
+
 const ImageSwapComponent: React.FC = () => {
   // Product details object
-  const product = {
+  const product: Product = {
     src: "Asgaardsofa3.png", 
     src1: "Asgaardsofa2.png", 
     src2: "Asgaardsofa5.png", 
@@ -39,7 +63,7 @@ const ImageSwapComponent: React.FC = () => {
     product.src3,
     product.src4,
   ]); // Alternate small images
-  const [cartItems, setCartItems] = useState<Array<any>>([]); // Cart items state
+  const [cartItems, setCartItems] = useState<CartItem[]>([]); // Cart items state with defined type
 
   // Handlers for various actions
   const handleSizeChange = (size: string) => setSelectedSize(size); // Change size
@@ -51,7 +75,7 @@ const ImageSwapComponent: React.FC = () => {
 
   // Add item to the cart
   const handleAddToCart = () => {
-    const newCartItem = {
+    const newCartItem: CartItem = {
       product,
       selectedSize,
       selectedColor,
@@ -116,7 +140,7 @@ const ImageSwapComponent: React.FC = () => {
 
             {/* Size selection */}
             <h2 className="text-sm text-greyish mt-5 pb-3">Size</h2>
-            <div className="flex gap-4 mt-2 ">
+            <div className="flex gap-4 mt-2">
               {product.sizes.map((size) => (
                 <button
                   key={size}
@@ -150,14 +174,14 @@ const ImageSwapComponent: React.FC = () => {
               {/* Quantity selector */}
               <div className="flex items-center gap-2 border border-greyish rounded py-1">
                 <button
-                  className="px-3 py-1  rounded"
+                  className="px-3 py-1 rounded"
                   onClick={() => handleQuantityChange("decrement")} // Decrease quantity
                 >
                   -
                 </button>
                 <span className="text-lg">{quantity}</span>
                 <button
-                  className="px-3 py-1  rounded"
+                  className="px-3 py-1 rounded"
                   onClick={() => handleQuantityChange("increment")} // Increase quantity
                 >
                   +
@@ -191,53 +215,36 @@ const ImageSwapComponent: React.FC = () => {
                               </div>
                               <div className="mt-6 flex gap-8">
                                 <div>
-                                  <span className="text-black text-lg">{item.product.name}</span>
-                                  <br />
-                                  <span className="text-black pr-1">
-                                    {item.quantity} x
-                                    <span className="inline text-drkyellow pl-1">
-                                      {item.product.price}
-                                    </span>
-                                  </span>
+                                  <span className="font-medium">Name:</span>
+                                  <span>{item.product.name}</span>
                                 </div>
-                                <div className="mt-4">
-                                  <img
-                                    src="cut.png"
-                                    alt="Remove"
-                                    className="w-4 h-4 cursor-pointer"
-                                    onClick={() => handleRemoveFromCart(index)} // Remove item from cart
+                                <div>
+                                  <span className="font-medium">Size:</span>
+                                  <span>{item.selectedSize}</span>
+                                </div>
+                                <div>
+                                  <span className="font-medium">Quantity:</span>
+                                  <span>{item.quantity}</span>
+                                </div>
+                                <div>
+                                  <span className="font-medium">Color:</span>
+                                  <span
+                                    className="w-6 h-6 rounded-full"
+                                    style={{ backgroundColor: item.selectedColor }}
                                   />
                                 </div>
+                                <button
+                                  className="font-medium"
+                                  onClick={() => handleRemoveFromCart(index)} // Remove item from cart
+                                >
+                                  Remove
+                                </button>
                               </div>
                             </div>
                           ))}
-
-                          {/* Subtotal */}
-                          <div className="mt-10 flex justify-between items-center absolute bottom-[6rem] border-b-2 border-gray-300 h-[4rem] ">
-                            <span className="text-lg font-semibold mr-[7rem]">Subtotal</span>
-                            <span className="text-lg font-bold text-drkyellow">
-                              Rp {cartItems.reduce((acc, item) => acc + parseFloat(item.product.price.replace(/[^0-9.-]+/g, "")) * item.quantity, 0).toLocaleString()}.00
-                            </span>
-                          </div>
-
-                          {/* Cart and Checkout buttons */}
-                          <div className="flex justify-between items-center mt-4 bottom-9 absolute">
-                            <Link
-                              href="/cart"
-                              className="px-6 py-2 bg-white text-black rounded-full mr-3 border border-black hover:bg-gray-100"
-                            >
-                              Cart
-                            </Link>
-                            <Link
-                              href="/checkout"
-                              className="px-6 py-2 bg-white text-black border border-black rounded-full hover:bg-gray-100"
-                            >
-                              Checkout
-                            </Link>
-                          </div>
                         </>
                       ) : (
-                        <p className="text-center text-gray-500">No items in cart</p>
+                        <p>No items in cart</p>
                       )}
                     </SheetDescription>
                   </SheetHeader>

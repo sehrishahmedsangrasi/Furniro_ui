@@ -1,6 +1,7 @@
 import BlackBar from "@/components/BlackBar";
 import Link from 'next/link';
 
+
 export default function Cart() {
   return (
     <div className="w-full h-[59rem] relative">

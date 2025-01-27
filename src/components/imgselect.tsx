@@ -7,7 +7,7 @@ const ImgSelect = () => {
   const [imageCount, setImageCount] = useState(8); // Default to 8 images per page
   const [filterType, setFilterType] = useState('default'); // Default category
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
-  const [pageGroup, setPageGroup] = useState(1); // Track the current page group (1-3 etc.)
+  const [pageGroup] = useState(1); // Track the current page group (1-3 etc.)
 
   // Filter images based on the selected filter type
   const filteredImages = filterType === 'default'
