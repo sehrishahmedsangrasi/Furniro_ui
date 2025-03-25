@@ -24,7 +24,7 @@ const Slider: React.FC = () => {
     <div className="w-full h-[28rem] bg-powderpink mt-6 flex overflow-hidden">
       
       {/* Left section for the first image */}
-      <div className="relative h-[28rem] w-[25rem]">
+      <div className="relative h-[28rem] w-[23rem]">
         <img
           src={images[0].src}  
           alt="img"
@@ -50,7 +50,7 @@ const Slider: React.FC = () => {
       </div>
 
       {/* Right section for the second image and slider dots */}
-      <div className="flex flex-col gap-9 pl-5 h-[28rem] w-[25rem]">
+      <div className="flex flex-col gap-9 pl-5 h-[28rem] w-[22rem]">
         <img
           src={images[1].src}  
           alt="img"
@@ -71,7 +71,7 @@ const Slider: React.FC = () => {
       </div>
 
       {/* Third section for the third image */}
-      <div className="flex flex-col gap-9 pl-5 h-[28rem] w-[17rem]">
+      <div className="flex flex-col gap-9 pl-5 h-[28rem] w-[7.8rem]">
         <img
           src={images[2].src}  
           alt="img"

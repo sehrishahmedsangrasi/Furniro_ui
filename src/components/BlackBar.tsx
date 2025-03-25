@@ -1,55 +1,59 @@
-import React from 'react';
+"use client";
+import React, { useState, useEffect } from "react";
+
+const features = [
+  { img: "trophy.png", title: "High Quality", description: "Crafted from top materials" },
+  { img: "guarantee.png", title: "Warranty Protection", description: "Over 2 years" },
+  { img: "shipping.png", title: "Free Shipping", description: "Order over 150 $" },
+  { img: "customer-support.png", title: "24/7 Support", description: "Dedicated support" },
+];
 
 const BlackBar = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isSmallScreen, setIsSmallScreen] = useState(false); // Start with default value
+
+  useEffect(() => {
+    // Ensure this runs only in the browser
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 1024);
+    };
+
+    checkScreenSize(); // Set initial state
+    window.addEventListener("resize", checkScreenSize);
+
+    // Auto-switching feature every 5 seconds (only on small/medium screens)
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % features.length);
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, []);
+
   return (
-    <div className="bg-black h-[14rem] mt-14 flex items-center pl-[4rem] absolute bottom-0 right-0 left-0">
-
-      {/* Container for all features with equal spacing */}
-      <div className="flex justify-between space-x-4">
-        
-        {/* Feature: High Quality */}
-        <div className="flex items-center pr-4">
-          <div>
-            <img src="trophy.png" alt="High Quality" className="h-16 w-[4.5rem] pl-2 pr-2" />
+    <div className="bg-black h-[14rem] mt-14 absolute bottom-0 right-0 left-0">
+      <div className={`flex ${isSmallScreen ? "justify-center items-center" : "justify-between space-x-4"} h-full`}>
+        {isSmallScreen ? (
+          <div className="flex flex-col items-center text-center">
+            <img src={features[currentIndex].img} alt={features[currentIndex].title} className="h-16 w-[4.5rem] mb-2 " />
+            <span className="text-drkyellow text-xl font-bold">{features[currentIndex].title}</span>
+            <span className="text-lg text-cusGray">{features[currentIndex].description}</span>
           </div>
-          <div className="flex flex-col">
-            <span className="text-drkyellow text-xl font-bold">High Quality</span>
-            <span className="text-lg text-cusGray">Crafted from top materials</span>
-          </div>
-        </div>
-
-        {/* Feature: Warranty Protection */}
-        <div className="flex items-center pr-4">
-          <div>
-            <img src="guarantee.png" alt="Warranty Protection" className="h-16 w-[4.5rem] pl-2 pr-2" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-drkyellow text-xl font-bold">Warranty Protection</span>
-            <span className="text-lg text-cusGray">Over 2 years</span>
-          </div>
-        </div>
-
-        {/* Feature: Free Shipping */}
-        <div className="flex items-center pr-4">
-          <div>
-            <img src="shipping.png" alt="Free Shipping" className="h-16 w-[4.5rem] pl-2 pr-2" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-drkyellow text-xl font-bold">Free Shipping</span>
-            <span className="text-lg text-cusGray">Order over 150 $</span>
-          </div>
-        </div>
-
-        {/* Feature: 24/7 Support */}
-        <div className="flex items-center pr-4">
-          <div>
-            <img src="customer-support.png" alt="24/7 Support" className="h-16 w-[4.5rem] pl-2 pr-2" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-drkyellow text-xl font-bold">24/7 Support</span>
-            <span className="text-lg text-cusGray">Dedicated support</span>
-          </div>
-        </div>
+        ) : (
+          features.map((feature, index) => (
+            <div key={index} className="flex items-center pr-4">
+              <div>
+                <img src={feature.img} alt={feature.title} className="h-16 w-[4.5rem] pl-2 pr-2" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-drkyellow text-xl font-bold">{feature.title}</span>
+                <span className="text-lg text-cusGray">{feature.description}</span>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

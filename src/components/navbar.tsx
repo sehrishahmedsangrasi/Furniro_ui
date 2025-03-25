@@ -1,68 +1,63 @@
-'use client';
+"use client";
 
- 
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+
 
 const Navbar: React.FC = () => {
- 
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   return (
-    <nav className="flex items-center px-6 py-4 pl-9 pb-5 text-white">
+    <nav className="flex items-center justify-between lg:px-8 py-4 px-2 text-white relative bg-white z-50">
       {/* Left Section: Logo */}
-      <div className="flex items-center pr-72">
-        <div className="w-17 h-7 mr-3 flex">
-          <img
-            src="logo.png"
-            alt="Logo"
-            className="w-full h-full pr-1 mt-[2.2px]"
-          />
-          <span className="text-[1.5rem] font-semibold text-black">
-            Furniro
-          </span>
-        </div>
+      <div className="flex items-center w-17 h-6 mr-3">
+        <img src="logo.png" alt="Logo" className="w-full h-full pr-2" />
+        <span className="lg:text-[1.5rem] font-semibold text-black text-[1.3rem]">Furniro</span>
       </div>
 
-      {/* Middle Section: Navigation Links */}
-      <div className="hidden md:flex space-x-8 text-black mr-[11rem] text-[0.9rem] font-semibold">
-        <a href="\" className="hover:text-gray-700 pr-[4.2rem]">
-          Home
-        </a>
-        <a href="\shop" className="hover:text-gray-700 pr-[4.2rem]">
-          Shop
-        </a>
-        <a href="#about" className="hover:text-gray-700 pr-[3rem]">
-          About
-        </a>
+      {/* Middle Section: Navigation Links (Hidden on Mobile) */}
+      <div className=" lg:space-x-14 space-x-5 text-black text-[0.9rem] font-semibold">
+        <Link href="/" className="hover:text-gray-700">Home</Link>
+        <Link href="/shop" className="hover:text-gray-700">Shop</Link>
+        <Link href="#about" className="hover:text-gray-700">About</Link>
       </div>
 
-      {/* Right Section: Icons */}
-      <div className="flex items-center">
-        <div className="w-7 h-6 rounded-full mr-9">
-          <img src="accAlert.png" alt="Alert Icon" className="w-full h-full" />
-        </div>
-        <div className="w-7 h-6 rounded-full mr-9">
-          <img src="heart.png" alt="Wishlist Icon" className="w-full h-full" />
-        </div>
-        <div className="w-7 h-6 rounded-full mr-9">
-          <img src="search.png" alt="Search Icon" className="w-full h-full" />
-        </div>
-        <div className="w-7 h-6 rounded-full mr-7">
-          <img src="shoppingcart.png" alt="Logo" className="w-full h-full pr-1" />
-        </div>
-          
-        </div>
-      
+      {/* Right Section: Icons (Hidden on Mobile) */}
+      <div className="hidden md:flex items-center space-x-6">
+        <Image src="/accAlert.png" alt="Alert" width={26} height={26} />
+        <Image src="/heart.png" alt="Wishlist" width={26} height={26} />
+        <Image src="/search.png" alt="Search" width={26} height={26} />
+        <Image src="/shoppingcart.png" alt="Cart" width={26} height={26} />
+      </div>
 
-      {/* Responsive Adjustments */}
-      <div className="flex md:hidden flex-col items-center w-full mt-4 space-y-3">
-        <a href="\" className="text-black text-sm hover:text-gray-700">
-          Home
-        </a>
-        <a href="\shop" className="text-black text-sm hover:text-gray-700">
-          Shop
-        </a>
-        <a href="#about" className="text-black text-sm hover:text-gray-700">
-          About
-        </a>
+      {/* Mobile Menu Button */}
+      <div className="md:hidden">
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle Menu"
+          className="text-black"
+        >
+          {menuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+
+      {/*  Mobile Dropdown Menu (FIXED) */}
+      <div
+        className={`fixed top-[4.1rem] right-0 w-[4.5rem] sm:w-64 bg-white shadow-lg p-6 flex flex-col items-start space-y-4 transition-transform duration-300 ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
+        } z-50`}
+        style={{ visibility: menuOpen ? "visible" : "hidden" }} // Controls visibility
+      >
+        {/* Icons (Stacked Vertically) */}
+        <div className="flex flex-col items-start space-y-4 ">
+          <Image src="/accAlert.png" alt="Alert" width={24} height={24} />
+          <Image src="/heart.png" alt="Wishlist" width={24} height={24} />
+          <Image src="/search.png" alt="Search" width={24} height={24} />
+          <Image src="/shoppingcart.png" alt="Cart" width={24} height={24} />
+        </div>
+       
       </div>
     </nav>
   );

@@ -3,11 +3,11 @@ import Form from "@/components/form";
 
 export default function Checkout() {
   return (
-    <div className="w-full h-[115rem] relative">
+    <div className="w-full h-[148rem] lg:h-[115rem] md:h-[115rem] relative ">
 
       {/* Header Section */}
       <div className="w-full h-[4rem] pl-[3.8rem] pt-14 mb-32">
-        <div className="text-4xl font-bold">Checkout</div>
+        <div className="text-4xl font-bold ">Checkout</div>
         <div className="mt-1 text-sm flex items-center">
           <span className="font-medium">Home</span>
           <img src="arr.png" alt="arrow" className="mx-2 w-3 h-3" />
@@ -16,16 +16,16 @@ export default function Checkout() {
       </div>
 
       {/* Main Content */}
-      <div className="flex w-full h-[40rem] flex-col md:flex-row">
+      <div className="flex w-full h-[40rem] flex-col sm:flex-row">
 
         {/* Left Section (Form) */}
-        <div className="w-full md:w-[50%] pl-[3.8rem] flex flex-col h-[14rem]">
+        <div className="w-full md:w-[50%] p-2 lg:pl-[3.8rem] md:pl-[3.8rem] flex flex-col h-[14rem]  sm:mb-[9rem]">
           <Form />
         </div>
 
         {/* Right Section (Order Summary) */}
-        <div className="p-9 w-full md:w-[50%] relative mt-[3.3rem] flex items-center">
-          <div className="w-full p-[3.5rem]">
+        <div className="lg:p-9 md:p-9 p-0 w-full md:w-[50%] relative mt-[3.3rem] flex items-center ">
+          <div className="w-full p-[3.5rem] mt-[55rem] lg:mt-0 md:mt-0">
             
             {/* Product and Subtotal */}
             <div className="flex justify-between items-center pb-4">
@@ -80,7 +80,7 @@ export default function Checkout() {
       </div>
 
       {/* Footer */}
-      <div className="h-auto absolute bottom-0 w-full">
+      <div className="h-auto absolute bottom-0 w-full ">
         <BlackBar />
       </div>
     </div>

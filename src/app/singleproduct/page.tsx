@@ -7,7 +7,7 @@ import { products } from '@/app/dummydata';
 
 export default function SingleProductPage() {
     return (
-        <div className="h-auto">
+        <div className="min-h-full">
 
             {/* Main header Section */}
             <div className="w-full h-[4rem] bg-cuspinky mt-6 flex flex-col items-center justify-center relative">
@@ -20,6 +20,7 @@ export default function SingleProductPage() {
                 </div>
             </div>
 
+            
             {/* Image Swap Section */}
             <div className="h-[85rem] w-full lg:h-[48rem]">        
                 <ImageSwapComponent />
@@ -35,17 +36,19 @@ export default function SingleProductPage() {
                 {/* Section Heading */}
                 <p className="font-bold text-2xl text-CusBlck mb-4 text-center">Related Products</p>
 
-                {/* Product Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full px-4 sm:px-8 md:px-16 lg:px-32 justify-center">
-                    {products.slice(0, 4).map((product, index) => (
-                        <ProductCard
-                            key={index}
-                            src={product.src}
-                            themeHeading={product.themeHeading}
-                            name={product.name}
-                            price={product.price}
-                        />
-                    ))}
+                <div className='flex items-center justify-center min-h-[10rem] '>
+                    {/* Product Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full px-4 sm:px-8 md:px-16 lg:px-32 justify-center">
+                        {products.slice(0, 4).map((product, index) => (
+                            <ProductCard
+                                key={index}
+                                src={product.src}
+                                themeHeading={product.themeHeading}
+                                name={product.name}
+                                price={product.price}
+                            />
+                        ))}
+                    </div>
                 </div>
 
                 {/* Show More Button */}

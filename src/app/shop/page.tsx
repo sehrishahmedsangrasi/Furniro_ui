@@ -3,7 +3,7 @@ import BlackBar from "@/components/BlackBar";
 
 export default function ShopPage() {
     return (
-        <div className="h-[149rem] relative">
+        <div className="min-h-full pb-[16rem]  relative">
             {/* Header Section */}
             <div className="w-full h-[15rem] bg-cuspinky mt-6 flex flex-col items-center justify-center">
                 <div className="text-4xl font-bold">Shop</div>

@@ -99,7 +99,7 @@ const ImageSwapComponent: React.FC = () => {
   };
 
   return (
-    <div className="h-[45rem] w-full flex mt-9 flex-wrap sm:flex-nowrap">
+    <div className="h-[45rem] w-full flex mt-9 flex-wrap sm:flex-nowrap md:flex-nowrap">
       {/* Left Section - Image display */}
       <div className="h-[21rem] sm:h-[47rem] w-full sm:w-1/2 flex flex-wrap sm:flex-nowrap">
         {/* Thumbnail images for image swap */}
@@ -128,7 +128,7 @@ const ImageSwapComponent: React.FC = () => {
       </div>
 
       {/* Right Section - Product details, size/color selection */}
-      <div className="h-[47rem] w-full sm:w-1/2 flex flex-col mt-[12rem] sm:mt-0">
+      <div className="h-[47rem] w-full sm:w-1/2 flex flex-col mt-[12rem] sm:mt-0 ml-4">
         <div className="h-[34rem] w-full">
           <div className="h-[28.2rem] w-full">
             {/* Product name and price */}

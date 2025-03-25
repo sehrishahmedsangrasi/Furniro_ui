@@ -11,7 +11,7 @@ type ProductCardProps = {
 
 const ProductCard: React.FC<ProductCardProps> = ({ src, themeHeading, name, price }) => {
   return (
-    <div className="relative inline-block w-[15rem] border h-[25.5rem] overflow-hidden shadow-lg bg-custGray transform transition-transform duration-300 hover:scale-105">
+    <div className="relative inline-block lg:w-[15rem] w-[17rem] border h-[25.5rem] overflow-hidden shadow-lg bg-custGray transform transition-transform duration-300 hover:scale-105">
       {/* Image */}
       <img src={src} alt="Product" className="block w-full h-[17rem]" />
       
@@ -48,7 +48,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ src, themeHeading, name, pric
         {/* Name */}
         <p className="text-sm text-cusGray mt-1">{name}</p>
         {/* Price */}
-        <p className="text-md font-bold text-CusBlck mt-1">{price}</p>
+        <p className="text-md font-bold text-CusBlck mt-1">Rp {price}</p>
       </div>
       
     </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-white text-gray-800">
+    <footer className="bg-white text-gray-800 ">
       {/* Top Divider Line */}
       <div className="h-[0.05rem] w-full bg-gray-300"></div>
 
@@ -93,7 +93,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Divider Line */}
-      <div className="h-[0.09rem] mt-7 w-[90%] ml-[4rem] bg-gray-300"></div>
+      <div className="h-[0.09rem] mt-7 w-[90%] ml-[2.5rem] bg-gray-300"></div>
       
       {/* Footer Bottom Text */}
       <p className="mt-6 ml-[4rem]">2023 Funiro. All rights reserved</p>
