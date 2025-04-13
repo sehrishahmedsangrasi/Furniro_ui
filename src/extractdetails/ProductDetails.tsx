@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 
-export function getProductDetails() {
+export function useProductDetails() {
     const searchParams = useSearchParams();
 
     return {

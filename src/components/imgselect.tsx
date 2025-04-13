@@ -11,7 +11,7 @@ type Product = {
   description: string;
   roomType?: string; 
   image: string;
-  price: Number;
+  price: number;
 };
 
 const ImgSelect = () => {

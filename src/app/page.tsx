@@ -12,6 +12,14 @@ const getProducts = async () => {
   return await client.fetch(query);
 };
 
+interface Product {
+  _id: string;
+  image: string;
+  name: string;
+  description: string;
+  price: string;
+}
+
 export default async function Home() {
   const products = await getProducts();
 
@@ -59,7 +67,7 @@ export default async function Home() {
         <p className="font-bold text-2xl text-CusBlck">Our Products</p>
         <div className="flex items-center justify-center min-h-screen">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full lg:px-32 md:px-20 mx-auto">
-            {products.map((product: any) => (
+            {products.map((product: Product) => (
               <ProductCard
                 key={product._id}
                 src={product.image} 

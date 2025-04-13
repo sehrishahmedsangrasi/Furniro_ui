@@ -5,8 +5,7 @@ import Description from "@/components/description";
 import Link from 'next/link';
 import ProductCard from '@/components/product';
 import { Button } from '@/components/ui/button';
-import { products } from '@/app/dummydata';
-import { getProductDetails } from "@/extractdetails/ProductDetails"; 
+import { useProductDetails } from "@/extractdetails/ProductDetails"; 
 import { client } from '@/lib/sanity'; 
 import { useEffect,useState } from 'react';
 
@@ -17,11 +16,13 @@ type product_type = {
   description: string;
   roomType?: string; 
   image: string;
-  price: Number;
+  price: string;
 };
 
+
+
 export default function SingleProductPage() {
-    const product = getProductDetails(); 
+    const product = useProductDetails(); 
     const [products, setProducts] = useState<product_type[]>([]); 
 
      useEffect(() => {
@@ -78,7 +79,7 @@ export default function SingleProductPage() {
                 <div className='flex items-center justify-center min-h-[10rem] '>
                     {/* Product Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full px-4 sm:px-8 md:px-16 lg:px-32 justify-center">
-                    {products.slice(0, 4).map((product: any) => (
+                    {products.slice(0, 4).map((product: product_type) => (
                         <ProductCard
                             key={product._id}
                             src={product.image} 
