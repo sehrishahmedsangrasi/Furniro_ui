@@ -10,18 +10,18 @@ const features = [
 
 const BlackBar = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isSmallScreen, setIsSmallScreen] = useState(false); // Start with default value
+  const [isSmallScreen, setIsSmallScreen] = useState(false); 
 
   useEffect(() => {
-    // Ensure this runs only in the browser
+   
     const checkScreenSize = () => {
       setIsSmallScreen(window.innerWidth < 1024);
     };
 
-    checkScreenSize(); // Set initial state
+    checkScreenSize(); 
     window.addEventListener("resize", checkScreenSize);
 
-    // Auto-switching feature every 5 seconds (only on small/medium screens)
+    
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % features.length);
     }, 5000);

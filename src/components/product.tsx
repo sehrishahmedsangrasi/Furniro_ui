@@ -18,7 +18,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ src, themeHeading, name, pric
       {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-60 opacity-0 hover:opacity-100 flex flex-col justify-center items-center transition-opacity duration-700 hover:scale-101">
         {/* Add to Cart Button */}
-        <Link href="/singleproduct">
+        <Link 
+          href={{
+            pathname: '/singleproduct',
+            query: { src, themeHeading, name, price }
+          }}
+        >
           <Button variant="whiteCustom" size="customlg2">Add to cart</Button>
         </Link>
         {/* Like and Share Options */}

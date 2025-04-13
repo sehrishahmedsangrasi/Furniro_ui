@@ -5,14 +5,13 @@ import { images as imageArray } from '../app/dummydata';
 
 const Slider: React.FC = () => {
   const [activeDot, setActiveDot] = useState(0); // Track the active dot
-  const [images, setImages] = useState(imageArray); // Use the imported images array
-
+  const [images, setImages] = useState(imageArray); 
   // Handle the arrow button click to rotate images and cycle dots
   const handleArrowClick = () => {
     setImages((prevImages) => {
       const newImages = [...prevImages];
-      const lastImage = newImages.pop(); // Remove the last image
-      newImages.unshift(lastImage!); // Add it to the front of the array
+      const lastImage = newImages.pop(); 
+      newImages.unshift(lastImage!); 
       return newImages;
     });
 

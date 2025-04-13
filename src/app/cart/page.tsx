@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 
 export default function Cart() {
+  
   return (
     <div className="w-full lg:h-[59rem] h-[74rem] relative">
 

@@ -6,7 +6,7 @@ import ProductCard from '../components/product';
 import Slider from '../components/slider';
 import Link from 'next/link';
 
-// Fetch data from Sanity in a Server Component
+// Fetch data from Sanity 
 const getProducts = async () => {
   const query = `*[_type == "product"]{ _id, description, name, "image": image.asset->url, price }`;
   return await client.fetch(query);
@@ -16,7 +16,7 @@ export default async function Home() {
   const products = await getProducts();
 
   return (
-    <div className="min-h-[240rem]">
+    <div className="min-h-[230rem]">
 
       {/* Page Head */}
       <Head>
@@ -62,10 +62,10 @@ export default async function Home() {
             {products.map((product: any) => (
               <ProductCard
                 key={product._id}
-                src={product.image} // Image from Sanity
-                themeHeading={product.name} // Theme heading from Sanity
-                name={product.description} // Name from Sanity
-                price={product.price} // Price from Sanity
+                src={product.image} 
+                themeHeading={product.name} 
+                name={product.description} 
+                price={product.price} 
               />
             ))}
           </div>

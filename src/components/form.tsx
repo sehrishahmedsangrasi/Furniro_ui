@@ -17,13 +17,13 @@ const Form = () => {
     additionalInfo: "",
   });
 
-  // State to manage available provinces based on selected country
+  
   const [provinces, setProvinces] = useState<string[]>([]);
 
-  // State to toggle visibility of the 'Additional Info' input field
+  
   const [isAdditionalInfoVisible, setAdditionalInfoVisible] = useState<boolean>(false);
 
-  // Array containing countries and their corresponding provinces
+  
   const countries = [
     { name: "Sri Lanka", provinces: ["Western", "Central", "Southern", "Northern", "Eastern"] },
     { name: "Pakistan", provinces: ["Punjab", "Sindh", "Khyber Pakhtunkhwa", "Balochistan"] },
@@ -49,19 +49,19 @@ const Form = () => {
       setFormData(prevFormData => ({
         ...prevFormData,
         country: selectedCountry,
-        province: country.provinces[0], // Set default province based on selected country
+        province: country.provinces[0], 
       }));
     } else {
       setProvinces([]); // Clear provinces if country doesn't have any
       setFormData(prevFormData => ({
         ...prevFormData,
         country: selectedCountry,
-        province: "", // Set province to empty if country doesn't have provinces
+        province: "", 
       }));
     }
   };
 
-  // Handler for general input change (text or select)
+  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prevFormData => ({
@@ -70,7 +70,7 @@ const Form = () => {
     }));
   };
 
-  // Handler for changes to the 'Additional Info' field
+ 
   const handleAdditionalInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setFormData(prevFormData => ({
@@ -79,46 +79,46 @@ const Form = () => {
     }));
   };
 
-  // Function to validate the form inputs
+  
   const validateForm = () => {
     const { firstName, lastName, email, zipCode, phone } = formData;
 
-    // Check if required fields are filled
+    
     if (!firstName || !lastName) {
       alert("First Name and Last Name are required.");
       return false;
     }
 
-    // Validate email format using regex
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email)) {
       alert("Please enter a valid email.");
       return false;
     }
 
-    // Validate zip code format (5-digit)
+   
     const zipCodeRegex = /^[0-9]{5}$/;
     if (!zipCode || !zipCodeRegex.test(zipCode)) {
       alert("Please enter a valid 5-digit zip code.");
       return false;
     }
 
-    // Validate phone number format (10-digit)
+    
     const phoneRegex = /^[0-9]{10}$/;
     if (!phone || !phoneRegex.test(phone)) {
       alert("Please enter a valid phone number.");
       return false;
     }
 
-    return true; // Return true if all validations pass
+    return true; 
   };
 
-  // Handler for form submission
+ 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
       alert("Form submitted successfully!");
-      // Handle form submission logic here
+    
       // Reset form data after submission
       setFormData({
         firstName: "",

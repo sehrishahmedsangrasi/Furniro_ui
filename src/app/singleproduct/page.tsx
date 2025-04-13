@@ -1,11 +1,46 @@
+"use client";
+
 import ImageSwapComponent from "@/components/ImageSwapComponent";
 import Description from "@/components/description";
 import Link from 'next/link';
 import ProductCard from '@/components/product';
 import { Button } from '@/components/ui/button';
 import { products } from '@/app/dummydata';
+import { getProductDetails } from "@/extractdetails/ProductDetails"; 
+import { client } from '@/lib/sanity'; 
+import { useEffect,useState } from 'react';
+
+
+type product_type = {
+  _id: string;
+  name: string;
+  description: string;
+  roomType?: string; 
+  image: string;
+  price: Number;
+};
 
 export default function SingleProductPage() {
+    const product = getProductDetails(); 
+    const [products, setProducts] = useState<product_type[]>([]); 
+
+     useEffect(() => {
+        const fetchProducts = async () => {
+          const query = `*[_type == "product"]{
+            _id, 
+            name, 
+            description, 
+            roomType,
+            "image": image.asset->url, 
+            price
+          }`;
+          const data:product_type[] = await client.fetch(query);
+          setProducts(data);
+        };
+    
+        fetchProducts();
+      }, []);
+
     return (
         <div className="min-h-full">
 
@@ -16,14 +51,18 @@ export default function SingleProductPage() {
                     <img src="arr.png" alt="arrow" className="mx-2 width-3 h-3" />
                     <span className="text-sm text-cusGray mr-6">Shop</span>
                     <span className="text-xl text-cusGray mr-6">|</span>
-                    <span className="text-bold font-medium text-lg">Asgaard Sofa</span>
+                    <span className="text-bold font-medium text-lg">{product.themeHeading || "Product"}</span>
                 </div>
             </div>
 
-            
             {/* Image Swap Section */}
             <div className="h-[85rem] w-full lg:h-[48rem]">        
-                <ImageSwapComponent />
+                <ImageSwapComponent
+                src={product.src} 
+                themeHeading={product.themeHeading} 
+                name={product.name} 
+                price={product.price} 
+                />
             </div>
 
             {/* Description Section */}
@@ -39,15 +78,15 @@ export default function SingleProductPage() {
                 <div className='flex items-center justify-center min-h-[10rem] '>
                     {/* Product Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full px-4 sm:px-8 md:px-16 lg:px-32 justify-center">
-                        {products.slice(0, 4).map((product, index) => (
-                            <ProductCard
-                                key={index}
-                                src={product.src}
-                                themeHeading={product.themeHeading}
-                                name={product.name}
-                                price={product.price}
-                            />
-                        ))}
+                    {products.slice(0, 4).map((product: any) => (
+                        <ProductCard
+                            key={product._id}
+                            src={product.image} 
+                            themeHeading={product.name} 
+                            name={product.description} 
+                            price={product.price} 
+                        />
+                    ))}
                     </div>
                 </div>
 

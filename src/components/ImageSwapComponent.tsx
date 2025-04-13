@@ -33,44 +33,50 @@ interface CartItem {
   quantity: number;
   image: string;
 }
+type ProductCardProps = {
+  src: string;
+  themeHeading: string;
+  name: string;
+  price: string;
+};
 
-const ImageSwapComponent: React.FC = () => {
-  // Product details object
+const ImageSwapComponent: React.FC<ProductCardProps> = ( {src, themeHeading, name, price }) => {
+
   const product: Product = {
     src: "Asgaardsofa3.png", 
     src1: "Asgaardsofa2.png", 
     src2: "Asgaardsofa5.png", 
     src3: "Asgaardsofa1.png", 
     src4: "Asgaardsofa4.png", 
-    themeHeading: "Syltherine",
-    name: "Asgaard sofa",
-    price: "Rp 250,000.00",
+    themeHeading: name,
+    name: themeHeading,
+    price: `Rp ${price}`,
     roomType: "Bedroom",
     description:
       "A stylish cafe chair perfect for your modern interiors. Comfortable, durable, and designed to make your space stand out.",
-    sizes: ["XS", "L", "XL"], // Available sizes
-    colors: ["#816DFA", "#000000", "#B88E2F"], // Available colors
+    sizes: ["XS", "L", "XL"], 
+    colors: ["#816DFA", "#000000", "#B88E2F"], 
   };
 
-  // State management
-  const [selectedSize, setSelectedSize] = useState<string>("L"); // Default selected size
-  const [selectedColor, setSelectedColor] = useState<string>(product.colors[0]); // Default selected color
-  const [quantity, setQuantity] = useState<number>(1); // Default quantity is 1
-  const [bigImage, setBigImage] = useState<string>(product.src); // Main image state
+  
+  const [selectedSize, setSelectedSize] = useState<string>("L"); 
+  const [selectedColor, setSelectedColor] = useState<string>(product.colors[0]); 
+  const [quantity, setQuantity] = useState<number>(1); 
+  const [bigImage, setBigImage] = useState<string>(src); // Main image state
   const [smallImages, setSmallImages] = useState<string[]>([
     product.src1,
     product.src2,
     product.src3,
     product.src4,
   ]); // Alternate small images
-  const [cartItems, setCartItems] = useState<CartItem[]>([]); // Cart items state with defined type
+  const [cartItems, setCartItems] = useState<CartItem[]>([]); 
 
   // Handlers for various actions
-  const handleSizeChange = (size: string) => setSelectedSize(size); // Change size
-  const handleColorChange = (color: string) => setSelectedColor(color); // Change color
+  const handleSizeChange = (size: string) => setSelectedSize(size); 
+  const handleColorChange = (color: string) => setSelectedColor(color); 
   const handleQuantityChange = (operation: string) => {
-    if (operation === "increment") setQuantity(prev => prev + 1); // Increment quantity
-    else if (operation === "decrement" && quantity > 1) setQuantity(prev => prev - 1); // Decrement quantity, ensuring it stays > 1
+    if (operation === "increment") setQuantity(prev => prev + 1); 
+    else if (operation === "decrement" && quantity > 1) setQuantity(prev => prev - 1); 
   };
 
   // Add item to the cart
@@ -82,21 +88,22 @@ const ImageSwapComponent: React.FC = () => {
       quantity,
       image: bigImage,
     };
-    setCartItems(prevCartItems => [...prevCartItems, newCartItem]); // Add new item to the cart
+    setCartItems(prevCartItems => [...prevCartItems, newCartItem]); 
   };
 
   // Remove item from the cart
   const handleRemoveFromCart = (index: number) => {
-    setCartItems(prevCartItems => prevCartItems.filter((_, i) => i !== index)); // Remove the item at the specified index
+    setCartItems(prevCartItems => prevCartItems.filter((_, i) => i !== index)); 
   };
 
   // Handle image click to swap the main image
   const handleImageClick = (clickedImage: string, index: number) => {
     const newSmallImages = [...smallImages];
-    newSmallImages[index] = bigImage; // Swap clicked image with the current main image
-    setSmallImages(newSmallImages); // Update small images
-    setBigImage(clickedImage); // Set new big image
+    newSmallImages[index] = bigImage; 
+    setSmallImages(newSmallImages); 
+    setBigImage(clickedImage); 
   };
+ 
 
   return (
     <div className="h-[45rem] w-full flex mt-9 flex-wrap sm:flex-nowrap md:flex-nowrap">
@@ -108,7 +115,7 @@ const ImageSwapComponent: React.FC = () => {
             <div
               key={index}
               className="flex bg-cuspinky items-center justify-center rounded-lg h-[4rem] w-[7rem] cursor-pointer sm:w-[4.6rem] sm:h-[4.3rem] transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
-              onClick={() => handleImageClick(imgSrc, index)} // Change the big image on click
+              onClick={() => handleImageClick(imgSrc, index)} 
             >
               <img
                 src={imgSrc}
@@ -122,7 +129,7 @@ const ImageSwapComponent: React.FC = () => {
         {/* Main large image display */}
         <div className="h-[20rem] sm:h-[28rem] w-full sm:w-[87%] flex justify-center mt-2">
           <div className="bg-cuspinky h-[28rem] w-full sm:w-[87%] flex items-center justify-center rounded-lg">
-            <img src={bigImage} alt="Big Display" className="h-full w-auto" />
+            <img src={bigImage} alt="Big Display" className="h-[90%] w-auto" />
           </div>
         </div>
       </div>
@@ -132,11 +139,11 @@ const ImageSwapComponent: React.FC = () => {
         <div className="h-[34rem] w-full">
           <div className="h-[28.2rem] w-full">
             {/* Product name and price */}
-            <h1 className="text-2xl">{product.name}</h1>
-            <p className="text-lg text-greyish">{product.price}</p>
+            <h1 className="text-2xl">{themeHeading}</h1>
+            <p className="text-lg text-greyish">{price}</p>
 
             {/* Product description */}
-            <p className="mt-10 text-sm text-gray-700 h-[4.4rem] mr-20">{product.description}</p>
+            <p className="mt-10 text-sm text-gray-700 h-[4.4rem] mr-20">{name}</p>
 
             {/* Size selection */}
             <h2 className="text-sm text-greyish mt-5 pb-3">Size</h2>
@@ -147,7 +154,7 @@ const ImageSwapComponent: React.FC = () => {
                   className={`px-4 py-2 rounded-lg border ${
                     selectedSize === size ? "bg-drkyellow text-white" : "bg-white text-black"
                   }`}
-                  onClick={() => handleSizeChange(size)} // Change size on click
+                  onClick={() => handleSizeChange(size)} 
                 >
                   {size}
                 </button>
@@ -163,8 +170,8 @@ const ImageSwapComponent: React.FC = () => {
                   className={`w-6 h-6 rounded-full border ${
                     selectedColor === color ? "border-CusBlck" : `border-${color}`
                   }`}
-                  style={{ backgroundColor: color }} // Display color
-                  onClick={() => handleColorChange(color)} // Change color on click
+                  style={{ backgroundColor: color }} 
+                  onClick={() => handleColorChange(color)} 
                 />
               ))}
             </div>
@@ -175,14 +182,14 @@ const ImageSwapComponent: React.FC = () => {
               <div className="flex items-center gap-2 border border-greyish rounded py-1">
                 <button
                   className="px-3 py-1 rounded"
-                  onClick={() => handleQuantityChange("decrement")} // Decrease quantity
+                  onClick={() => handleQuantityChange("decrement")} 
                 >
                   -
                 </button>
                 <span className="text-lg">{quantity}</span>
                 <button
                   className="px-3 py-1 rounded"
-                  onClick={() => handleQuantityChange("increment")} // Increase quantity
+                  onClick={() => handleQuantityChange("increment")} 
                 >
                   +
                 </button>
@@ -192,7 +199,7 @@ const ImageSwapComponent: React.FC = () => {
               <Sheet>
                 <SheetTrigger
                   className="px-6 py-2 bg-white text-black rounded-lg border border-black hover:bg-gray-100"
-                  onClick={handleAddToCart} // Add product to cart
+                  onClick={handleAddToCart} 
                 >
                   Add To Cart
                 </SheetTrigger>
@@ -230,7 +237,7 @@ const ImageSwapComponent: React.FC = () => {
                                     src="cut.png"
                                     alt="Remove"
                                     className="w-4 h-4 cursor-pointer"
-                                    onClick={() => handleRemoveFromCart(index)} // Remove from cart
+                                    onClick={() => handleRemoveFromCart(index)} 
                                   />
                                 </div>
                               </div>

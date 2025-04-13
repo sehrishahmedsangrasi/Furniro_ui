@@ -32,7 +32,7 @@ export default {
             validation: (Rule: Rule) => Rule.required(),
         },
         {
-            name:'roomtype',
+            name:'roomType',
             type:'string',
             title:'roomType',
             validation: (Rule: Rule) => Rule.required(),
