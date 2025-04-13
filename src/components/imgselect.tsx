@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import ProductCard from '../components/product';
 import { client } from '../lib/sanity'; 
+export const revalidate = 3900;
 
 
 type Product = {

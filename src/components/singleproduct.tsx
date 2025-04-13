@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { useProductDetails } from "@/extractdetails/ProductDetails"; 
 import { client } from '@/lib/sanity'; 
 import { useEffect,useState } from 'react';
+export const revalidate = 3900;
 
 
 type product_type = {

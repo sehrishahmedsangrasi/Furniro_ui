@@ -5,6 +5,7 @@ import ImageComponent from '../components/img';
 import ProductCard from '../components/product';
 import Slider from '../components/slider';
 import Link from 'next/link';
+export const revalidate = 3900;
 
 // Fetch data from Sanity 
 const getProducts = async () => {
