@@ -67,14 +67,13 @@
 // import { writeClient } from "@/lib/writeClient"; 
 
 //  Instead import the factory and create the client at runtime:
-import { createClient } from '@sanity/client';
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
-export const runtime = 'nodejs'; // Ensure using Node.js runtime
+export const runtime = 'nodejs'; // Use Node runtime
 
 export async function POST(req: Request) {
   const sig = req.headers.get("stripe-signature")!;
@@ -99,11 +98,10 @@ export async function POST(req: Request) {
       cart = metadata.cart ? JSON.parse(metadata.cart) : [];
     } catch (e) {
       console.error("Failed to parse cart from metadata:", metadata.cart);
-      console.log(e)
-      cart = [];
     }
 
-    //  Initialize Sanity client here at runtime
+    // ✅ Dynamically import and initialize Sanity client here
+    const { createClient } = await import('@sanity/client');
     const writeClient = createClient({
       projectId: 'srkj07q7',
       dataset: 'production',
