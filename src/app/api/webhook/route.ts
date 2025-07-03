@@ -63,10 +63,10 @@
 //   },
 // };
 
-// ❌ Don't import a pre-initialized client like this:
+//  Don't import a pre-initialized client like this:
 // import { writeClient } from "@/lib/writeClient"; 
 
-// ✅ Instead import the factory and create the client at runtime:
+//  Instead import the factory and create the client at runtime:
 import { createClient } from '@sanity/client';
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
@@ -99,10 +99,11 @@ export async function POST(req: Request) {
       cart = metadata.cart ? JSON.parse(metadata.cart) : [];
     } catch (e) {
       console.error("Failed to parse cart from metadata:", metadata.cart);
+      console.log(e)
       cart = [];
     }
 
-    // ✅ Initialize Sanity client here at runtime
+    //  Initialize Sanity client here at runtime
     const writeClient = createClient({
       projectId: 'srkj07q7',
       dataset: 'production',
