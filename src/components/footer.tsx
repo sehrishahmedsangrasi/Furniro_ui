@@ -29,7 +29,7 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a href="#about" className="text-black hover:text-CusBlck text-bold">
+              <a href="\about" className="text-black hover:text-CusBlck text-bold">
                 About
               </a>
             </li>

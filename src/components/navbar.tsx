@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 
 const Navbar: React.FC = () => {
@@ -21,7 +22,7 @@ const Navbar: React.FC = () => {
       <div className=" lg:space-x-14 space-x-5 text-black text-[0.9rem] font-semibold">
         <Link href="/" className="hover:text-gray-700">Home</Link>
         <Link href="/shop" className="hover:text-gray-700">Shop</Link>
-        <Link href="#about" className="hover:text-gray-700">About</Link>
+        <Link href="/about" className="hover:text-gray-700">About</Link>
       </div>
 
       {/* Right Section: Icons (Hidden on Mobile) */}
@@ -29,8 +30,24 @@ const Navbar: React.FC = () => {
         <Image src="/accAlert.png" alt="Alert" width={26} height={26} />
         <Image src="/heart.png" alt="Wishlist" width={26} height={26} />
         <Image src="/search.png" alt="Search" width={26} height={26} />
-        <Image src="/shoppingcart.png" alt="Cart" width={26} height={26} />
+         <Link href="/cart">
+            <Image src="/shoppingcart.png" alt="Cart" width={24} height={24} className="cursor-pointer" />
+          </Link>
+
+        <div>
+          <SignedOut>
+            <div className="text-white bg-black border border-black rounded-md py-1 px-4 cursor-pointer hover:bg-white hover:text-black transition duration-200">
+              <SignInButton />
+            </div>
+          </SignedOut>
+
+          <SignedIn>
+            <UserButton showName />
+          </SignedIn>
+        </div>
+
       </div>
+      
 
       {/* Mobile Menu Button */}
       <div className="md:hidden">
@@ -44,18 +61,31 @@ const Navbar: React.FC = () => {
       </div>
 
       {/*  Mobile Dropdown Menu (FIXED) */}
-      <div
-        className={`fixed top-[4.1rem] right-0 w-[4.5rem] sm:w-64 bg-white shadow-lg p-6 flex flex-col items-start space-y-4 transition-transform duration-300 ${
+     <div
+        className={`fixed top-[4.1rem] right-0 w-[14rem] sm:w-64 bg-white shadow-lg p-6 flex flex-col items-center justify-center transition-transform duration-300 ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         } z-50`}
-        style={{ visibility: menuOpen ? "visible" : "hidden" }} // Controls visibility
+        style={{ visibility: menuOpen ? "visible" : "hidden" }}
       >
         {/* Icons (Stacked Vertically) */}
-        <div className="flex flex-col items-start space-y-4 ">
+        <div className="flex flex-col items-center space-y-4 ">
           <Image src="/accAlert.png" alt="Alert" width={24} height={24} />
           <Image src="/heart.png" alt="Wishlist" width={24} height={24} />
           <Image src="/search.png" alt="Search" width={24} height={24} />
-          <Image src="/shoppingcart.png" alt="Cart" width={24} height={24} />
+          <Link href="/cart">
+            <Image src="/shoppingcart.png" alt="Cart" width={24} height={24} className="cursor-pointer" />
+          </Link>
+            <div>
+              <SignedOut>
+                <div className="text-white bg-black border border-black rounded-md py-1 px-4 cursor-pointer hover:bg-white hover:text-black transition duration-200">
+                  <SignInButton />
+                </div>
+              </SignedOut>
+
+              <SignedIn>
+                <UserButton showName />
+              </SignedIn>
+            </div>
         </div>
        
       </div>
