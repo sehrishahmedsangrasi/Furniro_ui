@@ -31,6 +31,7 @@ console.log("Webhook triggered");
       cart = metadata.cart ? JSON.parse(metadata.cart) : [];
     } catch (e) {
       console.error(" Failed to parse cart from metadata:", metadata.cart);
+      console.error("Webhook error:", e);
       cart = [];
     }
 

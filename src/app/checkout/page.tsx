@@ -125,7 +125,6 @@ import { useCart } from '@/components/CartContext';
 import Form from "@/components/form";
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner"; 
 
 interface CartItem {

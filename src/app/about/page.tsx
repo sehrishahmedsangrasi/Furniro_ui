@@ -116,7 +116,7 @@ export default function AboutPage() {
         >
           <h2 className="text-2xl font-bold mb-2">Join Our Mission</h2>
           <p className="text-gray-700 mb-4">
-            We&#39;re always looking for passionate collaborators. Whether you're a designer, developer, or dreamer — let's grow together!
+            We&#39;re always looking for passionate collaborators. Whether you&#39;re a designer, developer, or dreamer — let&#39;s grow together!
           </p>
           <button className="mt-2 px-6 py-2 bg-white text-cuspinky font-semibold rounded-full hover:bg-gray-100 transition">
             Contact Us
