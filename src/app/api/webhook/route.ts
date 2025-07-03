@@ -98,6 +98,7 @@ export async function POST(req: Request) {
       cart = metadata.cart ? JSON.parse(metadata.cart) : [];
     } catch (e) {
       console.error("Failed to parse cart from metadata:", metadata.cart);
+      console.log(e)
     }
 
     // ✅ Dynamically import and initialize Sanity client here
