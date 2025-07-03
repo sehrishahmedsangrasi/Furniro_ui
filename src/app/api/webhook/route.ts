@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   try {
     event = stripe.webhooks.constructEvent(rawBody, sig, endpointSecret);
   } catch (err) {
-    console.error("❌ Webhook signature verification failed:", err);
+    console.error(" Webhook signature verification failed:", err);
     return new NextResponse("Webhook error", { status: 400 });
   }
 console.log("Webhook triggered");
@@ -30,7 +30,7 @@ console.log("Webhook triggered");
     try {
       cart = metadata.cart ? JSON.parse(metadata.cart) : [];
     } catch (e) {
-      console.error("❌ Failed to parse cart from metadata:", metadata.cart);
+      console.error(" Failed to parse cart from metadata:", metadata.cart);
       cart = [];
     }
 
@@ -45,10 +45,10 @@ console.log("Webhook triggered");
         deliveryDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), //
       });
 
-      console.log("✅ Order saved to Sanity for user:", userId);
+      console.log(" Order saved to Sanity for user:", userId);
       return new NextResponse("Success", { status: 200 });
     } catch (err) {
-      console.error("❌ Sanity push failed:", err);
+      console.error(" Sanity push failed:", err);
       return new NextResponse("Sanity error", { status: 500 });
     }
   }
@@ -57,7 +57,7 @@ console.log("Webhook triggered");
 }
 export const config = {
   api: {
-    bodyParser: false, // ✅ Important: disables body parsing for Stripe webhooks
+    bodyParser: false, 
   },
 };
 

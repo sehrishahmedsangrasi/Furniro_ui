@@ -26,12 +26,12 @@ export async function POST(req: Request) {
       mode: "payment",
       line_items: items.map((item: any) => ({
         price_data: {
-          currency: "pkr", // Adjust if needed
+          currency: "pkr", 
           product_data: {
             name: item.name,
            
           },
-          unit_amount: Math.round(item.price * 100), // Stripe expects smallest currency unit (paisa)
+          unit_amount: Math.round(item.price * 100), 
         },
         quantity: item.quantity,
       })),

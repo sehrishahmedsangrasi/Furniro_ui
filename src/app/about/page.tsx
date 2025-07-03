@@ -21,7 +21,7 @@ export default function AboutPage() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mt-4 max-w-2xl text-gray-700"
         >
-          Learn more about who we are, our mission, our journey, and why we're committed to delivering excellence.
+          Learn more about who we are, our mission, our journey, and why We&#39;re committed to delivering excellence.
         </motion.p>
       </div>
 
@@ -116,7 +116,7 @@ export default function AboutPage() {
         >
           <h2 className="text-2xl font-bold mb-2">Join Our Mission</h2>
           <p className="text-gray-700 mb-4">
-            We're always looking for passionate collaborators. Whether you're a designer, developer, or dreamer — let's grow together!
+            We&#39;re always looking for passionate collaborators. Whether you're a designer, developer, or dreamer — let's grow together!
           </p>
           <button className="mt-2 px-6 py-2 bg-white text-cuspinky font-semibold rounded-full hover:bg-gray-100 transition">
             Contact Us

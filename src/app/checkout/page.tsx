@@ -122,12 +122,11 @@
 'use client';
 
 import { useCart } from '@/components/CartContext';
-import BlackBar from "@/components/BlackBar";
 import Form from "@/components/form";
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner"; // Or remove if you're not using Sonner
+import { toast } from "sonner"; 
 
 interface CartItem {
   product: {
@@ -142,7 +141,7 @@ interface CartItem {
 export default function Checkout() {
   const { cartItems } = useCart();
   const { user } = useUser();
-  const router = useRouter();
+  
 
   const getTotal = () =>
     cartItems.reduce((acc, item) => {
@@ -173,7 +172,7 @@ export default function Checkout() {
 
       const data = await response.json();
       if (data.url) {
-        window.location.href = data.url; // Redirect to Stripe Checkout
+        window.location.href = data.url; 
       } else {
         toast.error("Checkout session could not be created.");
       }
@@ -270,7 +269,7 @@ export default function Checkout() {
                   <a href="#" className="text-black font-bold">privacy policy</a>.
                 </div>
 
-                {/* ✅ Place Order Button triggers handleCheckout */}
+                {/*  Place Order Button triggers handleCheckout */}
                 <button
                   className="w-full bg-white text-black py-3 mt-6 rounded-md border border-black hover:bg-gray-100"
                   onClick={handleCheckout}

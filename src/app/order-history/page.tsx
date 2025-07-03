@@ -6,15 +6,15 @@ import { useCart } from '@/components/CartContext';
 import { useEffect } from 'react';
 
 export default function OrderSuccess() {
-  const { clearCart } = useCart(); // ✅ import clearCart
+  const { clearCart } = useCart(); 
 
   useEffect(() => {
-    // You could optionally check for `?success=true` in URL
+    
     const params = new URLSearchParams(window.location.search);
     const success = params.get('success');
 
     if (success ===  'true') {
-      clearCart(); // ✅ Clear only if payment success
+      clearCart(); 
     }
   }, []);
   const router = useRouter();

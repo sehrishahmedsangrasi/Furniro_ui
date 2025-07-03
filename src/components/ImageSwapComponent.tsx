@@ -3,13 +3,12 @@ import React, { useState } from "react";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from 'next/link';
-import { useCart } from '@/components/CartContext'; // ✅ import useCart
+import { useCart } from '@/components/CartContext'; 
 
 // Define types
 interface Product {
@@ -43,7 +42,7 @@ type ProductCardProps = {
 };
 
 const ImageSwapComponent: React.FC<ProductCardProps> = ({ src, themeHeading, name, price }) => {
-  const { cartItems, addToCart, removeFromCart } = useCart(); // ✅ use context
+  const { cartItems, addToCart, removeFromCart } = useCart(); 
 
   const product: Product = {
     src: "Asgaardsofa3.png",
@@ -87,11 +86,11 @@ const ImageSwapComponent: React.FC<ProductCardProps> = ({ src, themeHeading, nam
       quantity,
       image: bigImage,
     };
-    addToCart(item); // ✅ add globally
+    addToCart(item); 
   };
 
   const handleRemoveFromCart = (index: number) => {
-    removeFromCart(index); // ✅ remove globally
+    removeFromCart(index); 
   };
 
   const handleImageClick = (clickedImage: string, index: number) => {

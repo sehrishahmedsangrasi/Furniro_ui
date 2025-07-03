@@ -64,7 +64,7 @@ export default function OrderHistoryPage() {
     return (
       <div className="w-full min-h-screen px-6 py-16 bg-[#F9F1E7]">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold mb-6 text-[#B88E2F]">Today's Orders</h1>
+          <h1 className="text-3xl font-bold mb-6 text-[#B88E2F]">Today&#39;s Orders</h1>
           <div className="animate-pulse space-y-4">
             {[...Array(3)].map((_, i) => (
               <div key={i} className="h-32 bg-[#F9F1E7] rounded-lg border border-[#B88E2F]/20"></div>
@@ -79,7 +79,7 @@ export default function OrderHistoryPage() {
     return (
       <div className="w-full min-h-screen px-6 py-16 bg-[#F9F1E7]">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold mb-6 text-[#B88E2F]">Today's Orders</h1>
+          <h1 className="text-3xl font-bold mb-6 text-[#B88E2F]">Today&#39;s Orders</h1>
           <div className="p-4 bg-red-100 border-l-4 border-red-500 text-red-700">
             <p>{error}</p>
           </div>
@@ -92,7 +92,7 @@ export default function OrderHistoryPage() {
     <div className="w-full min-h-screen px-6 py-16 bg-[#F9F1E7]">
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-[#B88E2F]">Today's Orders</h1>
+          <h1 className="text-3xl font-bold text-[#B88E2F]">Today&#39;s Orders</h1>
           {user && (
             <div className="bg-[#B88E2F] text-white px-4 py-2 rounded-full">
               {user.fullName || user.firstName || user.username || 'User'}
